@@ -1,3 +1,4 @@
+
 #lang racket
 
 ;#1.1
@@ -39,3 +40,44 @@
 (distanzAB -27.10 -109.4 -12.1 -77.05)
 
 ;#2.3
+(define (Grad->Himmelsrichtung grad ) (if (< grad 30)
+                                          "N"
+                                          (if (< grad 60)
+                                              "NNE"
+                                              (if (< grad 90)
+                                                  "ENE"
+                                                  (if (< grad 120)
+                                                      "E"
+                                                      (if (< grad 150)
+                                                          "EES"
+                                                          (if (< grad 180)
+                                                              "SES"
+                                                              (if (< grad 210)
+                                                                  "S"
+                                                                  (if (< grad 240)
+                                                                      "SSW"
+                                                                      (if (< grad 270)
+                                                                          "WSW"
+                                                                          (if (< grad 300)
+                                                                              "W"
+                                                                              (if (< grad 330)
+                                                                                  "WWN"
+                                                                                  (if (< grad 360)
+                                                                                      "NWN"
+                                                                                      "Invalid Input"
+                                          )))))))))))))
+
+(define (Himmelsrichtung->Grad HR) (if (string-locale=? HR "N") 0
+                                       (if (string-locale=? HR "NNE") 30
+                                           (if (string-locale=? HR "ENE") 60
+                                               (if (string-locale=? HR "E") 90
+                                                   (if (string-locale=? HR "EES") 120
+                                                       (if (string-locale=? HR "SES") 150
+                                                           (if (string-locale=? HR "S") 180
+                                                               (if (string-locale=? HR "SSW") 210
+                                                                   (if (string-locale=? HR "WSW") 240
+                                                                       (if (string-locale=? HR "W") 270
+                                                                           (if (string-locale=? HR "WWN") 300
+                                                                               (if (string-locale=? HR "NWN") 330
+                                                                                       "Invalid Input"
+                                       )))))))))))))
