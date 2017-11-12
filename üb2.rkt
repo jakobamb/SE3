@@ -1,4 +1,10 @@
 #lang racket
+;Jakob Ambsdorf 
+;Julius Schenke 6923104
+;Jonas Dreiskämper 6930232
+
+;Übungsleiter: Seppke Übungszeit: Mittwoch 10-12
+
 (define wuff 'Flocki)
 (define Hund wuff)
 (define Wolf 'wuff)
@@ -101,4 +107,31 @@
         [(procedure? typus) "procedure"]
         [else "unbekannt"]))
 
-;letzter teil fehlt noch
+(define (id z) z)
+
+;(type-of (* 2 3 4))
+;gibt number zurück, da eine Zahl ausgerechnet wird
+
+;(type-of (not 42))
+;gibt boolean zurück, da boolean stärker bindet? 
+
+;(type-of '(eins zwei drei))
+;gibt pair zurück da eine liste auch immer ein pair ist(?)
+
+;(type-of '())
+;gibt list zurück da es sich um eine leere list handelt
+
+;(type-of (id sin))
+;id gibt einfach den eingabewert zurück, in diesem fall sin, also -> procedure
+
+;(type-of (string-ref "SE3" 2))
+;returnt den char and der stelle 2
+
+;(type-of (lambda (x) x))
+;mithilfe von lambda wird eine funktion erstellt, deswegen -> procedure
+
+;(type-of type-of)
+;type-of ist eine procedure 
+
+;(type-of (type-of type-of))
+;gibt die ausgabe von type-of type-of zurück, diese ist immer ein string 
