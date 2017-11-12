@@ -1,5 +1,5 @@
 #lang racket
-;Jakob Ambsdorf 6919840
+;Jakob Ambsdorf 
 ;Julius Schenke 6923104
 ;Jonas Dreiskämper 6930232
 
@@ -43,8 +43,6 @@
 ;(welcherNameGiltWo 'lily 'potter)
 ;gibt 'lily zurück, da let Person C als ersten Parameter der Funktion
 ;definiert, dieser ist in diesem Fall 'lily
-;Das leigt daran, dass die auf einer Ebene stehenden Anweisungen nicht wie in einer imperativen Programmiersprache nacheinander ausgewertet werden
-;Da wo PersonC als PersonA definiert wird, ist PersonA somit nur als Parameter bekannt, da die Zuweisung auf 'Zaphod noch nicht erfolgt ist
 
 ;(cdddr xs1)
 ;gibt '(wuff Hund) zurück da cdr die restliste nach dem ersten element zurückgibt,
@@ -115,10 +113,10 @@
 ;gibt number zurück, da eine Zahl ausgerechnet wird
 
 ;(type-of (not 42))
-;gibt boolean zurück, da not das Argument 42 als true interpretiert und mit der negation den boolschen wert #f erzeugt
+;gibt boolean zurück, da boolean stärker bindet? 
 
 ;(type-of '(eins zwei drei))
-;gibt pair zurück da eine liste auch immer ein pair ist (bzw. eine Verschachtelung von mehreren Pairs)
+;gibt pair zurück da eine liste auch immer ein pair ist(?)
 
 ;(type-of '())
 ;gibt list zurück da es sich um eine leere list handelt
