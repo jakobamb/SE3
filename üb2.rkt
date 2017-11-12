@@ -1,0 +1,104 @@
+#lang racket
+(define wuff 'Flocki)
+(define Hund wuff)
+(define Wolf 'wuff)
+(define (welcherNameGiltWo PersonA PersonB)
+  (let ((PersonA 'Zaphod)
+        (PersonC PersonA))
+    PersonC ))
+
+(define xs1 '(0 2 3 wuff Hund))
+(define xs2 (list wuff Hund))
+(define xs3 (cons Hund wuff))
+
+;Nr. 1
+
+;wuff
+;wuff ist definiert als 'Flocki
+
+;Hund
+;Hund -> wuff -> 'Flocki
+
+;Wolf
+;Wolf definiert als 'wuff
+
+;(quote Hund)
+;gibt einfach nur 'Hund aus
+
+;(eval Wolf)
+;evaluiert zu 'Flocki, s. wuff
+
+;(eval Hund)
+;kann nicht evaluiert werden, da wuff nicht definiert ist
+
+;(eval 'Wolf)
+;evaluiert zu 'wuff
+
+;(welcherNameGiltWo 'lily 'potter)
+;gibt 'lily zurück, da let Person C als ersten Parameter der Funktion
+;definiert, dieser ist in diesem Fall 'lily
+
+;(cdddr xs1)
+;gibt '(wuff Hund) zurück da cdr die restliste nach dem ersten element zurückgibt,
+;das wurde dreimal gemacht und nun ist nur noch die rest list (wuff Hund) vorhanden
+
+;(cdr xs2)
+;'(Flocki) da restliste und Hund -> wuff -> Flocki definiert ist
+
+;(cdr xs3)
+;'Flocki da nur das eine Element als 'Flocki definiert ist
+
+;(sqrt 1/4)
+;Wurzel von 1/4 ist 1/2
+
+;(eval '(welcherNameGiltWo 'Wolf 'Hund))
+;evaluiert zu 'Wolf da genau wie im oberen Beispiel
+
+;(eval (welcherNameGiltWo 'Hund 'Wolf))
+;evaluiert zu 'Flocki da Hund -> 'Flocki 
+
+;Nr.2
+
+;Nr. 2.1
+
+(define (fak n)
+  (if (= n 0)
+      1
+      (* n (fak(- n 1) ))))
+
+;Nr. 2.2
+
+(define (power r n)
+  (if (= n 0)
+      1
+      (if (odd? n)
+          (*(power r (sub1 n)) r)
+          (sqr (power r (/ n 2))))))
+
+;Nr. 2.3
+
+(define (eulersche)
+  (* (/ (euler 1) 2) (power 10 1001)))
+
+(define (euler x)
+  (let ([ende (/ 1(power 10 1000))]
+        [zähler (/ x(fak (- x 1)))])
+    (if (< zähler ende)
+        0
+        (+ zähler (euler (+ x 1))))))
+
+;Nr. 3
+
+(define (type-of typus)
+  (cond [(boolean? typus) "boolean"]
+        [(pair? typus) "pair"]
+        [(list? typus) "list"]
+        [(symbol? typus) "symbol"]
+        [(number? typus) "number"]
+        [(char? typus) "char"]
+        [(string? typus) "string"]
+        [(vector? typus) "vector"]
+        [(procedure? typus) "procedure"]
+        [else "unbekannt"]))
+
+;letzter teil fehlt noch
