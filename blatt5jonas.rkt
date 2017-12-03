@@ -13,16 +13,18 @@ Jonas Dreiskämper 6930232
 ;1.1.1
 ;Listen für die Merkmale erstellen, welche die Dominanten Merkmale ordnen
 
-(define musterung '(sterne punkte streifen))
-(define farbe '(blau gruen gelb rot))
-(define fuehler '(gekruemmt geschweift gerade))
-(define fluegel '(elliptisch rhomibsch hexagonal))
+(define musterung '(stars dots stripes))
+(define farbe '(blue green yellow red))
+(define fuehler '(curly curved straight))
+(define fluegel '(ellipse rhomb hexagon))
 
+;Aufgabe 1.2.1
 ;Rezessive gene finden mithilfe von member indem ein Merkmal vorbestimmt wird und dann das dominate gen angegeben wird
 (define (rezfind merkmal dominant)
   (let ([rez (member dominant merkmal)])
     (list (list-ref rez (random (length rez))))))
 
+;Aufgabe 1.2.2
 ;entweder mit cond jeden typ von merkmalen benutzen oder 4 funktionen für alle merkmale einzelnt
 (define (vmus dom1 dom2)
   (if (> (length (member dom1 musterung)) (length (member dom2 musterung)))
@@ -44,5 +46,9 @@ Jonas Dreiskämper 6930232
            dom1
            dom2))
 
-;1.1.2
-
+;1.2.3 
+(define (erzeug schmetterling)
+  (print (show-butterfly (car schmetterling)
+                  (cadr schmetterling)
+                  (caddr schmetterling)
+                  (cadddr schmetterling))))
