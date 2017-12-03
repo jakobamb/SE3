@@ -92,8 +92,6 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 (define (get-fluegelform-r schmetterling)
   (cdr (cadddr schmetterling)))
 
-
-
 ;1.2.5
 
 ;1.2.6
@@ -109,7 +107,12 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
           (cons generiere-kind
                 (generiere-kinder mutter vater (- anzahl 1))))
       ;rufe die funktion rekursiv auf, dieses mal mit schmetterlingsobjekten für mutter und vater
-      (generiere-kinder (new-schmetterling 
+      (generiere-kinder (apply new-schmetterling mutter)
+                        (apply new-schmetterling vater))))
+
+;hilfsfunktion für 1.2.6, um ein einzelnes Kind zu erzeugen
+(define (generiere-kind mutter vater)
+  (cons
       
 
 
