@@ -101,6 +101,12 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
   (cdr (cadddr schmetterling)))
 
 ;1.2.5
+(define (anzeigen schmetterling)
+  (print (show-butterfly (get-farbe-d schmetterling)
+                         (get-muster-d schmetterling)
+                         (get-fuehler-d schmetterling)
+                         (get-muster-d schmetterling))))
+
 
 ;1.2.6
 ;Generieret eine Liste von möglichen Kindern eines Schmetterlingselternpaares
