@@ -54,18 +54,18 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 (define (vergleiche art m1 m2)
     (if (< (index-of m1 art) (index-of m2 art)))
            '(m1 . m2)
-           '(m2 . m1)))
+           '(m2 . m1))
 
 ;1.2.3
 ;Konstruktor eines Schmetterlings anhand der gegebenen
 ;sichtbaren (dominanten) Merkmale und automatisches Erzeugen
 ;von zufälligen, rezesssiven Merkmalen.
 (define (new-schmetterling muster flfarbe füform flform)
-  (cons '(muster flfarbe füform flform)
-        '((list-ref musterung (random 0 2))
-          (list-ref farbe (random 0 3))
-          (list-ref fuehler (random 0 2))
-          (list-ref fluegel (random 0 2)))))
+  (list (list muster flfarbe füform flform)
+        (list (list-ref musterung (random 0 3))
+          (list-ref farbe (random 0 4))
+          (list-ref fuehler (random 0 3))
+          (list-ref fluegel (random 0 3)))))
 
 ;1.2.4
 (define (get-farbe-d schmetterling)
@@ -104,7 +104,7 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
   (if (list? (car mutter))
       (if (<= anzahl 0)
           '()
-          (cons generiere-kind
+          (cons (generiere-kind mutter vater) 
                 (generiere-kinder mutter vater (- anzahl 1))))
       ;rufe die funktion rekursiv auf, dieses mal mit schmetterlingsobjekten für mutter und vater
       (generiere-kinder (apply new-schmetterling mutter)
@@ -112,9 +112,10 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 
 ;hilfsfunktion für 1.2.6, um ein einzelnes Kind zu erzeugen
 (define (generiere-kind mutter vater)
-  (cons
-      
-
+  (list (map (lamda (merkmal-mutter merkmal-vater)
+                    (car (vergleiche merkmal-mutter merkmal-vater))))
+        (map (lamda (merkmal-mutter merkmal-vater)
+                    (cdr (vergleiche merkmal-mutter merkmal-vater))))))
 
 
 
