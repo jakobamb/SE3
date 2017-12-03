@@ -52,9 +52,9 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 ;Vergleicht zwei Mermale einer gegebenen Art auf Dominanz
 ;gibt die Merkmale als Paar zurück, wobei an erster Stelle das dominante Merkmal steht 
 (define (vergleiche art m1 m2)
-    (if (< (index-of m1 art) (index-of m2 art)))
+    (if (< (index-of m1 art) (index-of m2 art))
            '(m1 . m2)
-           '(m2 . m1))
+           '(m2 . m1)))
 
 ;1.2.3
 ;Konstruktor eines Schmetterlings anhand der gegebenen
