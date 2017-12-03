@@ -52,3 +52,16 @@ Jonas Dreiskämper 6930232
                   (cadr schmetterling)
                   (caddr schmetterling)
                   (cadddr schmetterling))))
+
+;1.2.4 Akzessoren
+(define (getfarbe liste)
+  (car liste))
+
+(define (getmuster liste)
+  (cadr liste))
+
+(define (getfueh liste)
+  (caddr liste))
+
+(define (getform liste)
+  (cadddr liste))
