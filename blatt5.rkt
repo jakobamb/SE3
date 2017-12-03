@@ -48,6 +48,27 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 (define (get-rezessive-merkmale art merkmal)
   (member merkmal art))
 
+;1.2.2
+;Vergleicht zwei Mermale einer gegebenen Art auf Dominanz
+;gibt die Merkmale als Paar zurück, wobei an erster Stelle das dominante Merkmal steht 
+(define (vergleiche art m1 m2)
+    (if (< (index-of m1 art) (index-of m2 art)))
+           '(m1 . m2)
+           '(m2 . m1)))
+
+;1.2.3
+;Konstruktor eines Schmetterlings anhand der gegebenen
+;sichtbaren (dominanten) Merkmale und automatisches Erzeugen
+;von zufälligen, rezesssiven Merkmalen.
+(define (new-schmetterling muster flfarbe füform flform)
+  (cons '(muster flfarbe füform flform)
+        '((list-ref musterung (random 0 2))
+          (list-ref farbe (random 0 3))
+          (list-ref fuehler (random 0 2))
+          (list-ref fluegel (random 0 2)))))
+
+
+
 
 
 
