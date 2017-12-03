@@ -1,5 +1,13 @@
 #lang racket
 
+#|
+Jakob Ambsdorf 6919840
+Julius Schenke 6923104
+Jonas Dreiskämper 6930232
+
+Übungsleiter: Seppke Übungszeit: Mittwoch 10-12
+|#
+
 (require se3-bib/butterfly-module)
 
 (show-butterfly 'red 'star 'curly 'hexagon)
@@ -112,9 +120,9 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 
 ;hilfsfunktion für 1.2.6, um ein einzelnes Kind zu erzeugen
 (define (generiere-kind mutter vater)
-  (list (map (lamda (merkmal-mutter merkmal-vater)
+  (list (map (lambda (merkmal-mutter merkmal-vater)
                     (car (vergleiche merkmal-mutter merkmal-vater))))
-        (map (lamda (merkmal-mutter merkmal-vater)
+        (map (lambda (merkmal-mutter merkmal-vater)
                     (cdr (vergleiche merkmal-mutter merkmal-vater))))))
 
 
