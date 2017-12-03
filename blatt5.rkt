@@ -8,12 +8,12 @@
 1.1
 
 1.1.1
-Als Datenstruktur bietet sich für jedes Merkmal eine Liste von Paaren an.
-Jedes Paar besteht dabei aus dem Namen der Merkmalsausprägung sowie einer Zahl, die angibt wie Dominant das Gen ist.
-Am Beispiel der Musterung bedeutet das: Sterne haben den Wert 3, Punkte 2 und Streifen 1.
+Als Datenstruktur bietet sich für jedes Merkmal eine Liste an, bei der die Merkmale in ihrer Dominanz absteigend sortiert sind.
 
-Ein Vergleich der Dominanz zweier Gene besteht hiermit in dem Vergleich der zugeordneten Werte. Ist der Wert von Gen 1 höher als der von Gen 2, so ist Gen 1 dominant.
-Die möglichen rezessiven Gene zu einer gegebenen Merkmalsausprägung bestehen aus den Paaren der selben Tabelle, die einen niedrigeren Wert in der zweiten Spalte aufweisen.
+Ein Vergleich der Dominanz zweier Gene besteht hiermit in dem Vergleich der jeweiligen Position. Ist die Position von Gen 1 niedriger als der von Gen 2, so ist Gen 1 dominant.
+Die möglichen rezessiven Gene zu einer gegebenen Merkmalsausprägung bestehen aus den Werten der Tabelle, die einen höhere Position aufweisen.
+
+Damit in den Merkmalen besser gesucht und iteriert werden kann, werden diese Merkmalslisten wiederum zu einer Liste zusammengefasst.
 
 1.1.2
 Hier bietet sich ein Paar an, dass sich aus zwei Listen zusammensetzt.
@@ -37,12 +37,18 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
 ;1.2
 
 ;Merkmale
-(define musterung
-  (list ('sterne . 2)
-        ('punkte . 
+(define musterung '(stars dots stripes))
+(define farbe '(blue green yellow red))
+(define fuehler '(curly curved straight))
+(define fluegel '(ellipse rhomb hexagon))
 
 ;1.2.1
-(define (get-rezessive-merkmale merkmal)
-  (
+;gibt zu einem gegebenen Merkmal und der Merkmalsart eine Liste der rezessiven Merkmale zurück.
+;wertet zu #f aus, falls keine rezessiven Merkmale vorhanden sind
+(define (get-rezessive-merkmale art merkmal)
+  (member merkmal art))
+
+
+
 
 
