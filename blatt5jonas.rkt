@@ -24,6 +24,9 @@ Jonas Dreiskämper 6930232
   (let ([rez (member dominant merkmal)])
     (list (list-ref rez (random (length rez))))))
 
+(define (get-rezessive-merkmale art merkmal)
+  (member merkmal art))
+
 ;Aufgabe 1.2.2
 ;entweder mit cond jeden typ von merkmalen benutzen oder 4 funktionen für alle merkmale einzelnt
 (define (vmus dom1 dom2)
@@ -47,12 +50,12 @@ Jonas Dreiskämper 6930232
            dom2))
 
 ;1.2.3 
-(define (erzeug schmetterling)
-  (print (show-butterfly (car schmetterling)
-                  (cadr schmetterling)
-                  (caddr schmetterling)
-                  (cadddr schmetterling))))
-
+(define (new-schmetterling muster flfarbe füform flform)
+  (list (list muster flfarbe füform flform)
+        (list (list-ref musterung (random 0 3))
+          (list-ref farbe (random 0 4))
+          (list-ref fuehler (random 0 3))
+          (list-ref fluegel (random 0 3)))))
 ;1.2.4 Akzessoren
 (define (getfarbe liste)
   (car liste))
@@ -65,3 +68,36 @@ Jonas Dreiskämper 6930232
 
 (define (getform liste)
   (cadddr liste))
+
+(define (getdom schmetterling)
+  (list (getfarbe schmetterling)
+        (getmuster schmetterling)
+        (getfueh schmetterling)
+        (getform schmetterling)))
+
+;1.2.5 Anzeigen
+(define (anzeigen schmetterling)
+  (print (show-butterfly (car schmetterling)
+                  (cadr schmetterling)
+                  (caddr schmetterling)
+                  (cadddr schmetterling))))
+
+;1.2.6
+;Generieret eine Liste von möglichen Kindern eines Schmetterlingselternpaares
+;als Daten vom Typ Schmetterling, wobei die Eltern
+;anhand ihrer sichtbaren Merkmale erzeugt werden
+(define (generiere-kinder mutter vater anzahl)
+  ;prüfen, ob die argumente mutter und vater vom typ schmetterling oder eine Liste von merkmalen sind
+  ;wenn vom typ schmetterling, dann ist das Objekt eine Paar von listen
+  (if (list? (car mutter))
+      (if (<= anzahl 0)
+          '()
+          (cons generiere-kind
+                (generiere-kinder mutter vater (- anzahl 1))))
+      ;rufe die funktion rekursiv auf, dieses mal mit schmetterlingsobjekten für mutter und vater
+      (generiere-kinder (apply new-schmetterling mutter)
+                        (apply new-schmetterling vater))))
+
+;hilfsfunktion für 1.2.6, um ein einzelnes Kind zu erzeugen
+(define (generiere-kind mutter vater)
+  (cons
