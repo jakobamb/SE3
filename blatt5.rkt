@@ -67,8 +67,50 @@ Der so erstellte Schmetterling wird an eine Liste angehängt, die, nachdem die i
           (list-ref fuehler (random 0 2))
           (list-ref fluegel (random 0 2)))))
 
+;1.2.4
+(define (get-farbe-d schmetterling)
+  (car(car schmetterling)))
+
+(define (get-muster-d schmetterling)
+  (car (cadr schmetterling)))
+
+(define (get-fuehler-d schmetterling)
+  (car (caddr schmetterling)))
+
+(define (get-fluegelform-d schmetterling)
+  (car (cadddr schmetterling)))
+
+(define (get-farbe-r schmetterling)
+  (cdr(car schmetterling)))
+
+(define (get-muster-r schmetterling)
+  (cdr (cadr schmetterling)))
+
+(define (get-fuehler-r schmetterling)
+  (cdr (caddr schmetterling)))
+
+(define (get-fluegelform-r schmetterling)
+  (cdr (cadddr schmetterling)))
 
 
+
+;1.2.5
+
+;1.2.6
+;Generieret eine Liste von möglichen Kindern eines Schmetterlingselternpaares
+;als Daten vom Typ Schmetterling, wobei die Eltern
+;anhand ihrer sichtbaren Merkmale erzeugt werden
+(define (generiere-kinder mutter vater anzahl)
+  ;prüfen, ob die argumente mutter und vater vom typ schmetterling oder eine Liste von merkmalen sind
+  ;wenn vom typ schmetterling, dann ist das Objekt eine Paar von listen
+  (if (list? (car mutter))
+      (if (<= anzahl 0)
+          '()
+          (cons generiere-kind
+                (generiere-kinder mutter vater (- anzahl 1))))
+      ;rufe die funktion rekursiv auf, dieses mal mit schmetterlingsobjekten für mutter und vater
+      (generiere-kinder (new-schmetterling 
+      
 
 
 
