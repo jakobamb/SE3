@@ -35,3 +35,12 @@ Die Funktion ist baumrekursiv da sie sich selbst direkt mittels Baumrekursion wi
 Die Funktion ist eine Funktion höherer Ordnungm da eine andere Funktion als Parameter genommen wird.
 
 |#
+
+(define (take n xs [return '()])
+   ;; das Kopfst \" uck einer Liste: die ersten n Elemente
+   (cond
+     ((null? xs) '())
+     ((= n 0) return)
+     (else (take (- n 1) (cdr xs) (append return (list (car xs)))))))
+
+(trace take)
