@@ -8,6 +8,7 @@ Jonas Dreiskämper 6930232
 |#
 
 (require 2htdp/image)
+(require racket/trace)
 
 #|Aufgabe 1: Formen der Rekursion
 1.1 & 1.2
