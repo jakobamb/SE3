@@ -2,6 +2,15 @@
 
 (require 2htdp/image)
 (require racket/trace)
+(require 2htdp/universe)
+
+#|
+Jakob Ambsdorf 6919840
+Julius Schenke 6923104
+Jonas Dreiskämper 6930232
+
+Übungsleiter: Seppke Übungszeit: Mittwoch 10-12
+|#
 
 ;Aufgabe 1
 ;allgemein rekursiv
@@ -47,7 +56,6 @@ Jede dieser Spalten enthält N Elemente, die durch einen Wahrheitswert anzeigen,
 Durch die Unterteilung in Spalten kann man relativ einfach benachbarte Zellen finden, ansonsten ist die Datenstruktur auf das wesentliche reduziert,
 sodass sie die in den Folgeaufgaben benötigten Operationen gut unterstützt.
 
-TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
 |#
 
 ;2.2
@@ -80,7 +88,7 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
 
 ;2.3
 
-;Funktion, die für bel. Index des Spielfeldes die Werte der 8er-Nachbarschaft ermittelt
+;Funktion, die für bel. Index des Spielfeldes mithilfe list-ref die Werte der 8er-Nachbarschaft ermittelt
 
 (define (getzelle liste y x)
   (if (and (<= 0 y 29) (<= 0 x 29))
@@ -114,3 +122,49 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
   (map (lambda (row)
          (map (lambda (cell)
                 (next-cellstate (nachbarn cell)))))))
+
+;Aufgabe 2.4
+
+(define (game-of-life tick)
+  (big-bang start
+    (on-tick next-state tick)
+    (to-draw  draw-board)))
+
+
+(define start
+  (list
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #t #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #t #f #t #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #t #t #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)
+      (list #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f #f)))
+
+;(game-of-life 0.25)
+
+                  
