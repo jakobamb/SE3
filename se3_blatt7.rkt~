@@ -55,28 +55,20 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
 (define (draw-row cells xoffset yoffset scene)
   (if (null? cells)
       scene
-      (place-image (square 10
+      (place-image (square 20
                            (if (car cells)
-                               ;ausfüllen wenn lebendig, sonst nur umranden
-                               "solid"
-                               "outline")
+                                  ;ausfüllen wenn lebendig, sonst nur umranden
+                                  "solid"
+                                  "outline")
                            "black")
                    xoffset
                    yoffset
-                   (draw-row (cdr cells) (+ xoffset 10) yoffset scene))))
+                   (draw-row (cdr cells) (+ xoffset 20) yoffset scene))))
 
-(define (draw-board state [yoffset 10] [scene (empty-scene 600 600)])
-  (if (null? state)
-      scene
-      (draw-row (car state)
-                10
-                yoffset
-                (draw-board (cdr state) (+ yoffset 10)))))
+(define (draw-board state)
+  (foldr (lambda (acc row)
+           (draw-row 
 
-(draw-board (list (list #f #f #t #t #f #f #f #f #t #t #f #t #f #t)
-                  (list #f #t #f #t #f #f #f #f #t #t #f #t #t #f)
-                  (list #f #t #f #t #f #f #f #f #t #t #f #t #t #f)
-                  (list #f #f #t #t #f #f #f #f #f #f #t #f #f #t)))
+(draw-row (list #t #t #f #f #f #t #f #f #f #t #t) 0 10 (empty-scene 800 600))
                            
 
-            
