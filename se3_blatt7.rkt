@@ -51,7 +51,6 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
 |#
 
 ;2.2
-
 (define (draw-row cells xoffset yoffset scene)
   (if (null? cells)
       scene
@@ -76,29 +75,24 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
 (draw-board (list (list #f #f #t #t #f #f #f #f #t #t #f #t #f #t)
                   (list #f #t #f #t #f #f #f #f #t #t #f #t #t #f)
                   (list #f #t #f #t #f #f #f #f #t #t #f #t #t #f)
+
                   (list #f #f #t #t #f #f #f #f #f #f #t #f #f #t)))
-                           
 
 ;2.3
 
-;Funktion, die für bel. Index des Spielfeldes die Werte der 8er-Nachbarschaft ermittelt
+;berechnet den nächsten zustand für eine einzelne Zelle
+(define (next-cellstate nachbarn alive)
+  (let ([anzahl-nachbarn (foldl (lambda (elem acc)
+                                 (if elem
+                                     (add1 acc)
+                                     acc)) 0 nachbarn)])
+    (if (or (and alive (equal? anzahl-nachbarn 2))
+            (equal? anzahl-nachbarn 3))
+        #t
+        #f)))
 
-(define (nachbar liste y x)
-  (list
-   ((list-ref (liste) y) (list-ref(- x 1)))
-   ((list-ref (liste) y) (list-ref (+ x 1)))
-   ((list-ref (liste) (+ y 1)) (list-ref (+ x 1)))
-   ((list-ref (liste) (+ y 1)) (list-ref (- x 1)))
-   ((list-ref (liste) (- y 1)) (list-ref(- x 1)))
-   ((list-ref (liste) (+ y 1)) (list-ref x))
-   ((list-ref (liste) (- y 1)) (list-ref x))
-   ((list-ref (liste) (- y 1)) (list-ref (+ x 1)))))
-
-(define (listeee)
-  (list (list #f #f #f #f #f #f #f #f #f)
-        (list #f #f #f #f #f #f #t #f #f)
-        (list #f #f #f #f #f #f #f #f #f)
-        (list #f #f #f #f #f #f #f #f #f)))
-
-(trace nachbar)
-            
+;berechnet den nächsten zustand für das gesamte spielfeld
+(define (next-state state)
+  (map (lambda (row)
+         (map (lambda (cell)
+                (next-cellstate (nachbarn cell)))))))
