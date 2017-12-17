@@ -80,6 +80,24 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
 
 ;2.3
 
+;Funktion, die für bel. Index des Spielfeldes die Werte der 8er-Nachbarschaft ermittelt
+
+(define (getzelle liste y x)
+  (if (and (<= 0 y 29) (<= 0 x 29))
+      (list-ref (list-ref liste y) x)
+      #f))
+
+(define (nachbarn liste y x)
+  (list
+   (getzelle liste y (- x 1))
+   (getzelle liste y (+ x 1))
+   (getzelle liste (+ y 1) (+ x 1))
+   (getzelle liste (+ y 1) (- x 1))
+   (getzelle liste (- y 1) (- x 1))
+   (getzelle liste (+ y 1)  x)
+   (getzelle liste (- y 1) x)
+   (getzelle liste (- y 1) (+ x 1))))
+
 ;berechnet den nächsten zustand für eine einzelne Zelle
 (define (next-cellstate nachbarn alive)
   (let ([anzahl-nachbarn (foldl (lambda (elem acc)
