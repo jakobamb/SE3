@@ -79,4 +79,26 @@ TODO: Hier noch ein paar Zeilen wenn die Funktionen implementiert sind.
                   (list #f #f #t #t #f #f #f #f #f #f #t #f #f #t)))
                            
 
+;2.3
+
+;Funktion, die für bel. Index des Spielfeldes die Werte der 8er-Nachbarschaft ermittelt
+
+(define (nachbar liste y x)
+  (list
+   ((list-ref (liste) y) (list-ref(- x 1)))
+   ((list-ref (liste) y) (list-ref (+ x 1)))
+   ((list-ref (liste) (+ y 1)) (list-ref (+ x 1)))
+   ((list-ref (liste) (+ y 1)) (list-ref (- x 1)))
+   ((list-ref (liste) (- y 1)) (list-ref(- x 1)))
+   ((list-ref (liste) (+ y 1)) (list-ref x))
+   ((list-ref (liste) (- y 1)) (list-ref x))
+   ((list-ref (liste) (- y 1)) (list-ref (+ x 1)))))
+
+(define (listeee)
+  (list (list #f #f #f #f #f #f #f #f #f)
+        (list #f #f #f #f #f #f #t #f #f)
+        (list #f #f #f #f #f #f #f #f #f)
+        (list #f #f #f #f #f #f #f #f #f)))
+
+(trace nachbar)
             
