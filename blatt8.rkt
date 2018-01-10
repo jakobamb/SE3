@@ -19,13 +19,13 @@ a) Da bei (a) keine Funktion übergeben oder zuückgegeben wird, handelt
 es sich nicht um eine Funktion höherer Ordnung
 
 b) Da "map" eine Funktion auf eine Liste anwendet handelt es sich um
-eine Funktion höherer Ordnung (erhält Fkt + gibt Fkt zuück)
+eine Funktion höherer Ordnung (erhält Fkt + gibt Fkt zuück) -->keine Fkt zurück
 
-c) Funktion höherer Ordnung, da Funktion map verwendet (und somit Funktion zurück gibt)
+c) Funktion höherer Ordnung, da Funktion map verwendet (und somit Funktion zurück gibt) --> doch ...s.o.
 
-d)keine Funktion höherer Ordnung, da keinen Funktion übergeben/zurüchgegeben wird
+d)keine Funktion höherer Ordnung, da keinen Funktion übergeben/zurüchgegeben wird -->Fkt zurück --> höhere Ordnung
 
-e)Funktion höherer Ordnung, da
+e)Funktion höherer Ordnung, da 
 
 
 1.3 
@@ -49,6 +49,7 @@ der Liste die Funktion "gerade-oder-ungerade" angewendet wird
 ((compose ( curry foldl + 0) ( curry filter (curryr < 0)))
 '(5682 48 24915 -45 -6 48) )
 -->  -51, da
+--> filter < 0  (bei curry > 0) --> dann summe der ele.
 
 |#
 
