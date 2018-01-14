@@ -2,6 +2,12 @@
 
 (require swindle/setf
          swindle/misc)
+#|
+Jakob Ambsdorf 6919840
+Julius Schenke 6923104
+Jonas Dreiskämper 6930232
+Übungsleiter: Seppke Übungszeit: Mittwoch 10-12
+|#
 
 ;Aufgabe 1
 
@@ -113,5 +119,96 @@ Es wird so auch sicher gestellt, dass alle Hilfsmethoden ausgeüfhrt werden. Und
 
 ;Aufgabe 2
 
-;Aufgabe 2.1
+;Aufgabe 2.1.1 + Aufgabe 2.2 Operationen
 
+(defclass* speichermedien ()
+  (speichertyp :reader speicht
+               :initarg :speichertyp)
+  (maxrspeed :reader maxs
+             :initarg :maxrspeed)
+  (kapazität :reader kap
+             :initarg :kapazität)
+  (lebensdauer :reader leb
+               :initarg :lebensdauer)
+  (mobilität :reader mob
+             :initarg :mobilität)
+  :printer #t)
+
+
+(defclass* magnspei (speichermedien)
+  (speichertyp :initarg "Magnetisch")
+  :printer #t)
+
+(defclass* hdd (magnspei)
+  (speichertyp :initarg "HDD")
+  :printer #t)
+
+(defclass* diskette (magnspei)
+  (speichertyp :initarg "Diskette")
+  :printer #t)
+
+(defclass* cd/dvd (speichermedien)
+  (speichertyp :initarg "Optisch")
+  :printer #t)
+
+(defclass* halbleiter (speichermedien)
+  (speichertyp :initarg "Halbleiterspeicher")
+  :printer #t)
+
+(defclass* ssd/ram (halbleiter)
+  (speichertyp :initarg "SSD oder Ram")
+  :printer #t)
+
+(defclass* usb (halbleiter)
+  (speichertyp :initarg "USB-Stick")
+  :printer #t)
+
+
+;Aufgabe 2.1.2
+
+(defclass* magnetoop (magnspei cd/dvd)
+  :printer #t)
+
+(defclass* festsshd (ssd/ram hdd)
+  :printer #t)
+
+(defclass* bankkarte ()
+  :printer #t)
+
+;Aufgabe 2.2 generische Funktionen
+
+(defgeneric get-speichertyp ((s speichermedien)) :combination generic-append-combination)
+(defgeneric get-maxrspeed ((s speichermedien)) :combination generic-min-combination)
+(defgeneric get-kapazität ((s speichermedien)) :combination generic-min-combination)
+(defgeneric get-lebensdauer ((s speichermedien)) :combination generic-min-combination)
+(defgeneric get-mobilität ((s speichermedien)) :combination generic-min-combination)
+
+
+;Aufgabe 2.3
+
+(defmethod get-maxrspeed ((m magnspei))
+  (maxs m))
+(defmethod get-maxrspeed ((mh hdd))
+  (maxs mh))
+(defmethod get-maxrspeed ((md diskette))
+  (maxs md))
+(defmethod get-maxrspeed ((c cd/dvd))
+  (maxs c))
+(defmethod get-maxrspeed ((h halbleiter))
+  (maxs h))
+(defmethod get-maxrspeed ((sr ssd/ram))
+  (maxs sr))
+(defmethod get-maxrspeed ((u usb))
+  (maxs u))
+
+(define usbstick (make usb :maxrspeed 15 :kapazität 64 :lebensdauer 10 :mobilität "ja"))
+(define disk (make hdd :maxrspeed 35 :kapazität 1024 :lebensdauer 8 :mobilität "nein"))
+
+(get-maxrspeed usbstick)
+(get-maxrspeed disk)
+
+#|
+Es wird bei CLOS immer zuerst die Methode der Klasse mit der höchsten Präzedenz ausgeführt.
+Die Präzedenzliste regelt in welcher Reihenfolge Klassen geordnet sind. Jede Klasse hat Vorrang vor
+ihren Oberklassen. 
+|#
